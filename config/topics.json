@@ -1,0 +1,62 @@
+{
+  "rotation": ["ai_make_money", "product_review", "tech_tutorial"],
+  "niches": {
+    "ai_make_money": {
+      "label": "AI + Make Money Online",
+      "keyword_prefixes": ["How to use", "Best AI tools to", "How to make money with", "Top AI apps for"],
+      "keyword_suffixes": ["for beginners", "in 2025", "without experience", "from home", "for freelancers"],
+      "seed_topics": [
+        "AI writing tools for passive income",
+        "ChatGPT side hustle ideas",
+        "AI automation to save time and earn more",
+        "Best free AI tools for content creators",
+        "How to use Gemini for affiliate marketing",
+        "AI tools for YouTube automation",
+        "Make money online with AI in 2025",
+        "Best AI apps for freelancers",
+        "AI-powered email marketing strategies",
+        "How to start a blog with AI for free"
+      ],
+      "cpc_target": "high",
+      "content_type": "how_to"
+    },
+    "product_review": {
+      "label": "Product Reviews",
+      "keyword_prefixes": ["Review:", "Best", "Top", "Is", "Honest review of"],
+      "keyword_suffixes": ["review for beginners", "vs alternatives", "worth it?", "pros and cons", "2025 review"],
+      "seed_topics": [
+        "Notion AI review for productivity",
+        "Jasper AI vs Copy.ai comparison",
+        "Best budget laptops for remote work",
+        "Canva Pro review worth it",
+        "Grammarly vs ProWritingAid comparison",
+        "Best VPN for privacy 2025",
+        "Ahrefs vs Semrush for beginners",
+        "Hostinger review honest",
+        "Beehiiv vs Substack for newsletters",
+        "Best AI image generators free"
+      ],
+      "cpc_target": "high",
+      "content_type": "review"
+    },
+    "tech_tutorial": {
+      "label": "Tech Tutorials",
+      "keyword_prefixes": ["How to", "Step-by-step guide to", "Beginner guide to", "How to set up"],
+      "keyword_suffixes": ["for beginners", "step by step", "easy guide", "in under 10 minutes", "for free"],
+      "seed_topics": [
+        "How to start a blog for free",
+        "How to set up Google Analytics 4",
+        "How to create a YouTube channel from scratch",
+        "How to use Notion for project management",
+        "How to build an email list for free",
+        "How to monetize a blog with AdSense",
+        "How to use Canva for social media",
+        "How to automate tasks with Zapier free",
+        "How to create a landing page for free",
+        "How to optimize blog posts for SEO"
+      ],
+      "cpc_target": "medium",
+      "content_type": "tutorial"
+    }
+  }
+}
