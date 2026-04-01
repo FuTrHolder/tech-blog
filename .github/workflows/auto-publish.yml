@@ -42,30 +42,31 @@ jobs:
 
       # ── 4. Get Blogger Access Token via refresh token ───────────────────
       - name: Refresh Blogger OAuth Token
-        id: refresh_token
-        env:
-          GOOGLE_CLIENT_ID:     ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
-        run: |
-          RESPONSE=$(curl -s -X POST https://oauth2.googleapis.com/token \
-            -d "client_id=${GOOGLE_CLIENT_ID}" \
-            -d "client_secret=${GOOGLE_CLIENT_SECRET}" \
-            -d "refresh_token=${GOOGLE_REFRESH_TOKEN}" \
-            -d "grant_type=refresh_token")
+  id: refresh_token
+  env:
+    GOOGLE_CLIENT_ID:     ${{ secrets.GOOGLE_CLIENT_ID }}
+    GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+    GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+  run: |
+    RESPONSE=$(curl -s -X POST https://oauth2.googleapis.com/token \
+      -d "client_id=${GOOGLE_CLIENT_ID}" \
+      -d "client_secret=${GOOGLE_CLIENT_SECRET}" \
+      -d "refresh_token=${GOOGLE_REFRESH_TOKEN}" \
+      -d "grant_type=refresh_token")
 
-          ACCESS_TOKEN=$(echo $RESPONSE | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+    # 에러 확인용 (access_token은 마스킹됨)
+    echo "Response error: $(echo $RESPONSE | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('error','none'), d.get('error_description',''))")"
 
-          if [ -z "$ACCESS_TOKEN" ]; then
-            echo "[ERROR] Failed to get access token"
-            echo $RESPONSE
-            exit 1
-          fi
+    ACCESS_TOKEN=$(echo $RESPONSE | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
 
-          # Mask token in logs
-          echo "::add-mask::$ACCESS_TOKEN"
-          echo "BLOGGER_ACCESS_TOKEN=$ACCESS_TOKEN" >> $GITHUB_ENV
-          echo "[INFO] Access token refreshed successfully"
+    if [ -z "$ACCESS_TOKEN" ]; then
+      echo "[ERROR] Failed to get access token"
+      exit 1
+    fi
+
+    echo "::add-mask::$ACCESS_TOKEN"
+    echo "BLOGGER_ACCESS_TOKEN=$ACCESS_TOKEN" >> $GITHUB_ENV
+    echo "[INFO] Access token refreshed successfully"
 
       # ── 5. Run content generator ─────────────────────────────────────────
       - name: Generate and Publish Blog Post
